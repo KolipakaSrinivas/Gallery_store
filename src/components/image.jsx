@@ -1,12 +1,18 @@
 import React from "react"
+import { Context } from "../Context"
 
 function Image({className, img}) {
 
     
 
-  const [shownHoverContent,setIsShownHoverContent] = React.useState(false)
+  const [shownHoverContent,setIsShownHoverContent] = React.useState(false)  
 
-    const heartIcon = shownHoverContent && <i className="ri-heart-line favorite"></i> 
+    const {toggleFavorite} = React.useContext(Context)
+
+
+
+
+    const heartIcon = shownHoverContent && <i className="ri-heart-line favorite" onClick={(e)=>toggleFavorite(img.id)}></i> 
     const cartIcon = shownHoverContent && <i className="ri-add-circle-line cart"></i>
 
     return (
