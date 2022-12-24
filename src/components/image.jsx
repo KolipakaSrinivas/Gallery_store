@@ -21,7 +21,7 @@ function Image({className, img}) {
 
   function cartIcon() {
     const alreadyInCart = cartItems.some(item => item.id === img.id)
-    console.log(alreadyInCart)
+    
     if(alreadyInCart) {
         return <i className="ri-shopping-cart-fill cart" onClick={()=>removeFromCart(img.id)}></i>
 
@@ -31,12 +31,7 @@ function Image({className, img}) {
     }
 }
 
-  
 
-
-
-
-    // const cartIcon = hovered && <i className="ri-add-circle-line cart"onClick={()=>addToCart(img)}></i>
     
     return (
       
