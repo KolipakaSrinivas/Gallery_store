@@ -1,10 +1,12 @@
 import React from "react"
 import { Context } from "../Context"
+import PropTypes from 'prop-types'
 
 function Image({className, img}) {
 
   const [hovered, setHovered] = React.useState(false) 
-  const {toggleFavorite} = React.useContext(Context)
+
+  const {toggleFavorite,addToCart,cartItems} = React.useContext(Context)
 
 
 
@@ -17,11 +19,22 @@ function Image({className, img}) {
       }
   }
 
+  function cartIcon() {
+    const alreadyInCart = cartItems.some(item => item.id === img.id)
+    console.log(alreadyInCart)
+    if(alreadyInCart) {
+        return <i className="ri-shopping-cart-fill cart"></i>
+
+    } else if(hovered) {
+
+        return <i className="ri-add-circle-line cart" onClick={() => addToCart(img)}></i>
+    }
+}
 
 
 
 
-    const cartIcon = hovered && <i className="ri-add-circle-line cart"></i>
+    // const cartIcon = hovered && <i className="ri-add-circle-line cart"onClick={()=>addToCart(img)}></i>
     
     return (
       
@@ -31,9 +44,18 @@ function Image({className, img}) {
         >
             <img src={img.url} className="image-grid" alt='img' />
             {heartIcon()}
-            {cartIcon}
+            {cartIcon()}
         </div>
     )
+}
+
+Image.propTypes = {
+  className: PropTypes.string,
+  img: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+      isFavorite: PropTypes.bool
+  })
 }
 
 export default Image
