@@ -25,7 +25,7 @@ function ContextProvider({children}) {
         })
         setAllPhotos(updatedArr)
     }
-    
+    console.log(allPhotos)
     return (
         <Context.Provider value={{allPhotos,toggleFavorite}}>
             {children}
